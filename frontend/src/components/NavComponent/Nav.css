@@ -1,3 +1,14 @@
 .nav-a{
     color: white;
 }
+
+.userpad {
+    padding-right: 11px !important;
+    padding-left: 11px !important;
+}
+
+.adminpad {
+    /* padding-right: 12px !important;
+    padding-left: 12px !important; */
+    font-size: 15px !important;
+}

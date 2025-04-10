@@ -8,17 +8,28 @@ import Login from './components/LoginComponent/Login';
 import Register from './components/RegisterComponent/Register';
 import Home from './components/HomeComponent/Home';
 import {Routes,Route} from 'react-router-dom' ;
+import Logout from './components/LogoutComponent/Logout'
+import AdminHome from './components/AdminHomeComponent/AdminHome'
+import UserHome from './components/UserHomeComponent/UserHome'
+import EpAdmin from './components/EpAdminComponent/EpAdmin'
+import ManageUser from './components/ManageUserComponent/ManageUser'
+
 function App() {
   return (
     <>
       <Nav/> 
       <Routes>
         <Route path='/' element={<Home />}> </Route>
+        <Route path='/admin' element={<AdminHome />}> </Route>
+        <Route path="/user" element ={<UserHome />} ></Route>
         {/* <Route path='/about' element={<About />}> </Route> */}
         <Route path='/Blog' element={<Blog />}> </Route>
         <Route path='/contact' element={<Contact />}> </Route>
         <Route path='/login' element={<Login />}> </Route>
         <Route path='/register' element={<Register />}> </Route>
+        <Route path="/manageuser" element ={<ManageUser />} ></Route>
+        <Route path="/epadmin" element ={<EpAdmin />} ></Route>
+        <Route path="/logout" element ={<Logout />} ></Route>
       </Routes>
       {/* <Blog /> */}
       {/* <Contact/> */}

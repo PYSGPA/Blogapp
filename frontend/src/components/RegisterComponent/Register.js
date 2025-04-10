@@ -26,10 +26,6 @@ function Register() {
       setCity("");
       setPassword("");
       setMobile("");
-  
-     
-      
-
     }).catch((error)=>{
       // console.log(error);
       setOutput('user not registered successful')
@@ -45,7 +41,7 @@ function Register() {
                
                 <div class="col-lg-12 about-text wow fadeInUp" data-wow-delay="0.3s">
                    <font style={{"color":"blue"}}>{output}</font>
-                    <h1 class="mb-5">Welcome to register components</h1>
+                    <h1 class="mb-5">Register Here :</h1>
                   <div class="container">
                     <div class="row">
                         <div class="col-6">
@@ -55,9 +51,6 @@ function Register() {
                             <div class="mb-3">
       
                             <div class="mb-3">
-                              
-                            
-                              
                               <label for="name" class="form-label">Name</label>
                               {/* onchange chlne or field ki value ko target krenge */}
                               <input type="text" class="form-control" placeholder='Enter name' value={name} onChange={e=>setName(e.target.value)} />

@@ -1,6 +1,6 @@
 import "./Login.css";
 // import React from 'react';
-import { Component, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { __userapiurl } from "../../Apiurl";
 import { useNavigate } from "react-router-dom";
@@ -10,15 +10,13 @@ function Login() {
   const [password, setPassword] = useState();
   const [output, setOutput] = useState();
   const handleSubmit = () => {
-    if (email == " ") {
+    if (email == "") {
       setOutput("Email is required");
-    } else if (password == " ") {
+    } else if (password == "") {
       setOutput("Password is required");
     } else {
       const userDetail = { email: email, password: password };
-      axios
-        .post(__userapiurl + "login", userDetail)
-        .then((response) => {
+      axios.post(__userapiurl + "login", userDetail).then((response) => {
           //alert(response.data.token) //response ek object hota h jiske subobj me data hota h and data bhi ek obj h jiske subobj me
           // token hoga
           // alert(response.data.userList._id)
@@ -40,20 +38,11 @@ function Login() {
           localStorage.setItem("status", user.status);
           localStorage.setItem("info", user.info);
           localStorage.setItem("city", user.city);
-
-          setOutput("Login successful ");
-
           // detect kro kisne login kiya h
           // but msg show krke ky kroge direct navigate kr do
           // (user.role=="admin")?setOutput("login as a user"):setOutput("login as a admin");
           //  (user.role=="admin")?navigate("/admin"):navigate("/user");
-          if (user.role == "admin") {
-            // setOutput("login as a admin");
-            navigate("/admin");
-          } else {
-            setOutput("successful")
-            navigate("/user");
-          }
+          (user.role=="admin")?navigate("/admin"):navigate("/user")
         })
         .catch((error) => {
           // console.log(error)
@@ -71,46 +60,31 @@ function Login() {
               data-wow-delay="0.3s"
             >
               <h1 class="mb-5">Welcome to Login page</h1>
-              <font style={{ color: "blue" }}>{output}</font>
+              
               <div class="container">
                 <div class="row">
                   <div class="col-6">
+                    <font style={{ color: "blue" }}>{output}</font>
                     <form>
                       {/* to check its working or not */}
                       {/* {name} */}
                       <div class="mb-3">
                         <label for="email" class="form-label">
-                          Email address
+                          Email :
                         </label>
-                        <input
-                          type="email"
-                          class="form-control"
-                          placeholder="Email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
+                        <input type="email" class="form-control" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}
                         />
                       </div>
 
                       <div class="mb-3">
                         <label for="password" class="form-label">
-                          Password{" "}
+                          Password :
                         </label>
-                        <input
-                          type="password"
-                          class="form-control"
-                          placeholder="password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
+                        <input type="password" class="form-control" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}
                         />
                       </div>
 
-                      <button
-                        type="button"
-                        class="btn btn-danger"
-                        onClick={handleSubmit}
-                      >
-                        Login
-                      </button>
+                      <button type="button" class="btn btn-danger" onClick={handleSubmit}>Login</button>
                     </form>
                   </div>
                 </div>
