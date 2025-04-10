@@ -2,7 +2,6 @@ import './App.css';
 import Blog from './components/BlogComponent/Blog';
 import Contact from './components/ContactComponent/Contact';
 import Nav from './components/NavComponent/Nav';
-import Banner from './components/BannerComponent/Banner';
 import Footer from './components/FooterComponent/Footer';
 import Login from './components/LoginComponent/Login';
 import Register from './components/RegisterComponent/Register';
@@ -13,6 +12,7 @@ import AdminHome from './components/AdminHomeComponent/AdminHome'
 import UserHome from './components/UserHomeComponent/UserHome'
 import EpAdmin from './components/EpAdminComponent/EpAdmin'
 import ManageUser from './components/ManageUserComponent/ManageUser'
+import EpUser from './components/EpUserComponent/EpUser';
 
 function App() {
   return (
@@ -29,6 +29,7 @@ function App() {
         <Route path='/register' element={<Register />}> </Route>
         <Route path="/manageuser" element ={<ManageUser />} ></Route>
         <Route path="/epadmin" element ={<EpAdmin />} ></Route>
+        <Route path="/epuser" element ={<EpUser />} ></Route>
         <Route path="/logout" element ={<Logout />} ></Route>
       </Routes>
       {/* <Blog /> */}

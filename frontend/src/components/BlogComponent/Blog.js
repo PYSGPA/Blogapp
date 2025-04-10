@@ -16,7 +16,7 @@ function Blog() {
                   <div class="like_icon"><img src="./assets/images/like-icon.png"/></div>
                   <p class="post_text">Post By : 09/06/2019</p>
                   <h2 class="most_text">Most Awesome Blue Lake With Snow <br/>foreste</h2>
-                  <p class="lorem_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis</p>
+                  <p class="lorem_text">Lorem ipsum dolor sit amet, lorem_text12 consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis</p>
                   <div class="social_icon_main">
                      <div class="social_icon">
                         <ul>
