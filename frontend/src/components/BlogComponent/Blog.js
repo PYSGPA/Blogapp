@@ -1,4 +1,5 @@
 import './Blog.css';
+import AddBlog from '../AddBlogComponent/AddBlog';
 // import React from 'react';
 
 function Blog() {
@@ -6,6 +7,7 @@ function Blog() {
 
   <>
   
+  <AddBlog />
  
  {/* recent section start */} 
       <div class="about_section layout_padding">

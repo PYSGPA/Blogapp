@@ -6,6 +6,7 @@ const app = express();
 
 //to link router files on app.js
 import userRouter from './routes/user.router.js';
+import blogRouter from './routes/blog.router.js';
 
 //to load to cors function resolve cors problem
 app.use(cors());
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({"extended":true}));
 
 //aplication level middilewre check base url
 app.use("/user",userRouter);
+app.use("/addblog",blogRouter);
 
 app.listen(3001);
 console.log("Server listen at link :http://localhost:3001");
