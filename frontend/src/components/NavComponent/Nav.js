@@ -62,9 +62,6 @@ function Nav() {
                                     <a className="nav-link userpad" ><Link to="/user" className='nav-a'> UserHome </Link> </a>
                                  </li>
                                  <li class="nav-item">
-                                    <a class="nav-link userpad" ><Link to="/about " className='nav-a'> About </Link> </a>
-                                 </li>
-                                 <li class="nav-item">
                                     <a class="nav-link userpad"><Link to="/blog" className='nav-a'> Blog </Link> </a>
                                  </li>
                                  <li class="nav-item">
@@ -100,9 +97,6 @@ function Nav() {
                               <ul class="navbar-nav mr-auto">
                                  <li class="nav-item">
                                     <a className="nav-link" ><Link to="/" className='nav-a'> Home </Link> </a>
-                                 </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" ><Link to="/about " className='nav-a'> About </Link> </a>
                                  </li>
                                  <li class="nav-item">
                                     <a class="nav-link"><Link to="/blog" className='nav-a'> Blog </Link> </a>

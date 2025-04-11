@@ -2,7 +2,7 @@ import '../models/connection.js';
 import url from 'url';
 import jwt from 'jsonwebtoken';
 import rs from 'randomstring';
-
+import sendMail from './emailcontroller.js';
 import userSchemaModel from '../models/user.model.js';
 
 export const save =async(req,res)=>{
@@ -19,6 +19,7 @@ export const save =async(req,res)=>{
 //    console.log(userDetail);
   try{
     var user= await userSchemaModel.create(userDetail);
+    sendMail(user.email,user.password)
     res.status(201).json({"status":true});
   }
   catch(err)

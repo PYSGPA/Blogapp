@@ -61,7 +61,7 @@ function ManageUser() {
             <div class="row g-5 mx-lg-0">
                 <div class="col-lg-12 about-text wow fadeInUp" data-wow-delay="0.3s">
                 <h1>Manage user Details here!!!!!</h1>
-                <table class="table table-bordered" border={2}>
+                <table class="table table-bordered table-hover table-info" border={2}>
                    <tr>
                      <th>Regid</th>
                      <th>Name</th>

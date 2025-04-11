@@ -13,7 +13,7 @@ import UserHome from './components/UserHomeComponent/UserHome'
 import EpAdmin from './components/EpAdminComponent/EpAdmin'
 import ManageUser from './components/ManageUserComponent/ManageUser'
 import EpUser from './components/EpUserComponent/EpUser';
-
+import Verifyuser from './components/VerifyUserComponent/VerifyUser';
 function App() {
   return (
     <>
@@ -31,7 +31,9 @@ function App() {
         <Route path="/epadmin" element ={<EpAdmin />} ></Route>
         <Route path="/epuser" element ={<EpUser />} ></Route>
         <Route path="/logout" element ={<Logout />} ></Route>
+        <Route path="/verify/:email" element ={<Verifyuser />} ></Route>
       </Routes>
+    
       {/* <Blog /> */}
       {/* <Contact/> */}
       <Footer/>
