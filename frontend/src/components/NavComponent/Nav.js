@@ -79,13 +79,12 @@ function Nav() {
                                     <a class="nav-link userpad"><Link to="/contact" className='nav-a'> Contact Us </Link> </a>
                                  </li>
                                  <li className="nav-item">
-      <select className="form-select select nav-link " onChange={handleSelect} aria-label="Default select example">
-        <option value="" class="nav-link userpad">PROFILE SETTINGS</option>
-        <option value="1" class="nav-link userpad">EDIT PROFILE</option>
-        <option value="2" class="nav-link userpad">MANAGE USER</option>
-      </select>
-    </li>
-                                 
+                                    <select className="form-select select nav-link " onChange={handleSelect} aria-label="Default select example">
+                                       <option value="" class="nav-link userpad">PROFILE SETTINGS</option>
+                                       <option value="1" class="nav-link userpad">EDIT PROFILE</option>
+                                       <option value="2" class="nav-link userpad">MANAGE USER</option>
+                                    </select>
+                                 </li>
                                  <li class="nav-item">
                                     <a class="nav-link userpad"><Link to="/logout" className='nav-a'> Logout </Link> </a>
                                  </li>
