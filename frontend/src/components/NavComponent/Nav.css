@@ -10,5 +10,18 @@
 .adminpad {
     /* padding-right: 12px !important;
     padding-left: 12px !important; */
-    font-size: 14px !important;
+    font-size: 13px !important;
+}
+.select{
+    height: 48px;
+    background: #080c50;
+    border: none;
+    font-size: 16px;
+
+    color: white;
+    width: auto; /* or set a min-width */
+    min-width: 110px; /* adjust as needed */
+    white-space: nowrap; /* prevents text from wrapping */
+    overflow: visible;
+    text-overflow: clip;
 }

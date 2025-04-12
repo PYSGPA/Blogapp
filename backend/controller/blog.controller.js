@@ -11,6 +11,7 @@ export var save=async (req,res)=>{
     var _id=l==0?1:pList[l-1]._id+1;
    
     var picon=req.files.picon;
+    
     var imagenm = rs.generate()+"-"+Date.now()+"-"+picon.name;
     var pDetails={...req.body,"imagenm":imagenm,"_id":_id,"info":Date()};
     

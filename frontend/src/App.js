@@ -14,7 +14,8 @@ import EpAdmin from './components/EpAdminComponent/EpAdmin'
 import ManageUser from './components/ManageUserComponent/ManageUser'
 import EpUser from './components/EpUserComponent/EpUser';
 import Verifyuser from './components/VerifyUserComponent/VerifyUser';
-import AddBlog from './components/AddBlogComponent/AddBlog'
+import AddBlog from './components/AddBlogComponent/AddBlog';
+import CpUser from './components/CpUserComponent/CpUser';
 function App() {
   return (
     <>
@@ -34,6 +35,7 @@ function App() {
         <Route path="/logout" element ={<Logout />} ></Route>
         <Route path="/verify/:email" element ={<Verifyuser />} ></Route>
         <Route path='/addblog' element = {<AddBlog />}></Route>
+        <Route path='/cpuser' element={<CpUser/>}></Route>
       </Routes>
     
       {/* <Blog /> */}

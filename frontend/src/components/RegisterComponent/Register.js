@@ -9,21 +9,16 @@ function Register() {
   const [email,setEmail]=useState();
   const [password,setPassword]=useState();
   const [mobile,setMobile]=useState();
-  const [address,setAddress]=useState();
-  const [city,setCity]=useState();
-  const [gender,setGender]=useState();
   const [output,setOutput]=useState();
 
   const handleSubmit=()=>{
     
-    const userDetail = {"name":name,"email":email,"password":password,"mobile":mobile,"address":address,"city":city,"gender":gender}
+    const userDetail = {"name":name,"email":email,"password":password,"mobile":mobile}
     
     axios.post(__userapiurl+"save", userDetail).then((response)=>{
       setOutput("user register successfully");
       setName("");
-      setAddress("");
       setEmail("");
-      setCity("");
       setPassword("");
       setMobile("");
     }).catch((error)=>{
@@ -67,32 +62,12 @@ function Register() {
                               <label for="password" class="form-label">Password </label>
                               <input type="password" class="form-control" placeholder='password' value={password} onChange={e=>setPassword(e.target.value)}/>
                             </div>
+                           
                             <div class="mb-3">
                               <label for="mobile" class="form-label">Mobile</label>
                               <input type="text" class="form-control" placeholder='mobile' value={mobile} onChange={e=>setMobile(e.target.value)}/>
                             </div>
-                            <div class="mb-3">
-                              <label for="exampleInputPassword1" class="form-label">Address</label>
-                              <textarea  class="form-control" placeholder='address' value={address} onChange={e=>setAddress(e.target.value)}/>
-                            </div>
-                            <div class="mb-3">
-                              <label for="city" class="form-label">City</label>
-                              <select class="form-control" value={city} onChange={e=>setCity(e.target.value)}>
-                                <option>Select City</option>
-                                <option>Indore</option>
-                                <option>Ujjain</option>
-                                <option>Dewas</option>
-                                <option>Bhopal</option>
-                              </select>
-                            </div>
-                            <div class="mb-3">
-                              <label for="exampleInputPassword1" class="form-label">Gender</label>
-                              <br/>
-                            Male : <input name='gender' type='radio' value="Male" onChange={e=>setGender(e.target.value)}/>
-                            &nbsp; &nbsp;
-                            Female :  <input name='gender' type='radio' value="Female" onChange={e=>setGender(e.target.value)}/>
                             
-                            </div>
                             <button type="button" class="btn btn-danger" onClick={handleSubmit}>Register</button>
                           </form>
                         </div>
