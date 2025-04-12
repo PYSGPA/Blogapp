@@ -7,7 +7,6 @@ const userSchema=mongoose.Schema({
         type:String,
         require:[true,'name is required'],
         trim:true,
-        lowercase:true
     },
     email:{
         type:String,
@@ -20,7 +19,7 @@ const userSchema=mongoose.Schema({
         type:String,
         require:[true,'passowrd is required'],
         minlength:5,
-        maxlength:10
+        maxlength:15
     },
     mobile:{
         type:String,

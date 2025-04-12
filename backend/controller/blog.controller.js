@@ -14,7 +14,7 @@ export var save=async (req,res)=>{
     
     var imagenm = rs.generate()+"-"+Date.now()+"-"+picon.name;
     var pDetails={...req.body,"imagenm":imagenm,"_id":_id,"info":Date()};
-    
+   // console.log(pDetails);
     try {
      await BlogSchemaModel.create(pDetails);
      var __dirname = url.fileURLToPath(new URL('.', import.meta.url));
@@ -24,7 +24,7 @@ export var save=async (req,res)=>{
     }
     catch(error)
     {
-       //console.log(error);
+       console.log(error);
        res.status(500).json({"status":false});  
     }
    };
