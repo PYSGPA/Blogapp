@@ -8,7 +8,7 @@ function AddProduct() {
   const [content , setContent] = useState();
   // const [catName , setCatName] = useState();
   // const [subCatName , setSubCatName] = useState();
-  // const [AuthorName , setAuthorName] = useState();
+  const [AuthorName , setAuthorName] = useState(localStorage.getItem('name'));
   // const [price , setPrice] = useState();
   const [output , setOutput] = useState();
   // const [ cDetails , setCategoryDetails ] = useState([]);
@@ -32,7 +32,7 @@ function AddProduct() {
     formData.append('title', title);
     formData.append('content', content);
     // formData.append('subcatnm', subCatName);
-    // formData.append('authorname', AuthorName);
+    formData.append('author', AuthorName);
     // formData.append('price', price);
     formData.append('picon', file);
     const config = {
@@ -42,7 +42,7 @@ function AddProduct() {
       setTitle("");
       setContent("");
       // setSubCatName("");
-      // setAuthorName("");
+      setAuthorName("");
       // setPrice("");
       setOutput("Blog Added Successfully....");
     });
@@ -67,6 +67,11 @@ function AddProduct() {
                         <div class="form-group">
                           <label for="title">Blog Content:</label>
                           <input type="text" class="form-control" value={content} onChange={e => setContent(e.target.value)} />
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                          <label for="description">Author Name:</label>
+                          <input type="text" class="form-control" value={AuthorName} disabled onChange={e => setAuthorName(e.target.value)} />
                         </div>
                         <br/>
                         <div class="form-group">

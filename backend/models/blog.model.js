@@ -6,7 +6,11 @@ const BlogSchema = mongoose.Schema({
   title: {
     type: String,
     required: [true,"Title is required"],
-    lowercase: true,
+    trim: true
+  },
+  author: {
+    type: String,
+    required: [true,"Author is required"],
     trim: true
   },
   content: {
