@@ -47,9 +47,13 @@ function Blog() {
                 <div className="col-lg-8 col-sm-12 mb-5" key={index}>
                   <div className="about_img">
                     <img src={`./assets/uploads/blogimages/${blog.imagenm}`} alt="Blog" className="blog-image" />
+                    
                   </div>
                   <div className="like_icon">
                     <img src="./assets/images/like-icon.png" alt="like icon" />
+                    <p className="author-name mt-2 me-2" style={{ fontWeight: '500', fontStyle: 'italic' }}>
+    — {blog.author || 'Unknown Author'}
+  </p>
                   </div>
                   <div className="blog-content-wrapper">
                     <p className="post_text blog-date">Posted On: {new Date(blog.info).toLocaleString()}</p>

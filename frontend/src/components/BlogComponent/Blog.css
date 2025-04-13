@@ -55,4 +55,9 @@
     line-height: 1.6;
     color: #444;
   }
-    
+  .author-name {
+    color: #333;
+    font-size: 16px;
+    text-align: right;
+  }
+  
