@@ -8,9 +8,7 @@ function Home() {
 
   <>
       <Blog />
-      <Blog />
-      <Blog />
-      <Blog />
+      
   </>
   );
 }
