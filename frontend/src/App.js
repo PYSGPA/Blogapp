@@ -22,7 +22,7 @@ function App() {
     <>
       <Nav/> 
       <Routes>
-        <Route path='/' element={<Home />}> </Route>
+        <Route path='/' element={<ViewBlog />}> </Route>
         <Route path='/admin' element={<AdminHome />}> </Route>
         <Route path="/user" element ={<UserHome />} ></Route>
         {/* <Route path='/about' element={<About />}> </Route> */}

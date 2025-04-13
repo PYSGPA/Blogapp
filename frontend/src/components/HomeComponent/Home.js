@@ -1,4 +1,4 @@
-import Banner from '../BannerComponent/Banner';
+
 import Blog from '../BlogComponent/Blog';
 import './Home.css';
 // import React from 'react';

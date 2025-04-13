@@ -3,6 +3,7 @@ import './Nav.css';
 import { Link } from 'react-router-dom';
 import { useState , useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Auth from '../AuthComponent/Auth';
 function Nav() {
    const navigate = useNavigate();
    const [NavContent, setNavContent] = useState();
@@ -146,6 +147,7 @@ function Nav() {
 
   return (
       <>
+         <Auth />
          {NavContent}
       </>
   );
