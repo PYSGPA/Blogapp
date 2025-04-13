@@ -16,6 +16,7 @@ import EpUser from './components/EpUserComponent/EpUser';
 import Verifyuser from './components/VerifyUserComponent/VerifyUser';
 import AddBlog from './components/AddBlogComponent/AddBlog';
 import CpUser from './components/CpUserComponent/CpUser';
+import ViewBlog from './components/ViewBlogComponent/ViewBlog';
 function App() {
   return (
     <>
@@ -36,6 +37,7 @@ function App() {
         <Route path="/verify/:email" element ={<Verifyuser />} ></Route>
         <Route path='/addblog' element = {<AddBlog />}></Route>
         <Route path='/cpuser' element={<CpUser/>}></Route>
+        <Route path='/viewblog' element={<ViewBlog/>}></Route>
       </Routes>
     
       {/* <Blog /> */}

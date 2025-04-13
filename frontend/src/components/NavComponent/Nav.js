@@ -70,7 +70,7 @@ function Nav() {
                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                               <ul class="navbar-nav mr-auto">
                                  <li class="nav-item">
-                                    <a className="nav-link userpad" ><Link to="/user" className='nav-a'> UserHome </Link> </a>
+                                    <a className="nav-link userpad" ><Link to="/viewblog" className='nav-a'> UserHome </Link> </a>
                                  </li>
                                  <li class="nav-item">
                                     <a class="nav-link userpad"><Link to="/blog" className='nav-a'> Blog </Link> </a>

@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import './Blog.css';
-import AddBlog from '../AddBlogComponent/AddBlog';
+import './ViewBlog.css';
 import axios from 'axios';
-import { __Blogapiurl } from '../../Apiurl';
+import { __ViewBlogapiurl } from '../../Apiurl';
 
-function Blog() {
+function ViewBlog() {
   const [blogs, setBlogs] = useState([]);
   const [expandedBlogs, setExpandedBlogs] = useState({}); // Track expanded state for each blog
 
-  const userEmail = localStorage.getItem('email');
-
   const fetchBlogs = async () => {
     try {
-      const res = await axios.get(__Blogapiurl + `fetch?email=${userEmail}`);
+      const res = await axios.get(__ViewBlogapiurl + `fetch`);
       setBlogs(res.data);
     } catch (err) {
       console.error("Failed to fetch blogs", err);
@@ -20,10 +17,10 @@ function Blog() {
   };
 
   useEffect(() => {
-    if (userEmail) {
+ 
       fetchBlogs();
-    }
-  }, [userEmail]);
+    
+  }, []);
 
   const toggleReadMore = (index) => {
     setExpandedBlogs(prev => ({
@@ -34,7 +31,7 @@ function Blog() {
 
   return (
     <>
-      <AddBlog onBlogAdded={fetchBlogs} /> 
+     
 
       <div className="about_section layout_padding">
         <div className="container">
@@ -82,4 +79,4 @@ function Blog() {
   );
 }
 
-export default Blog;
+export default ViewBlog;
