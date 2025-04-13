@@ -13,6 +13,13 @@ const BlogSchema = mongoose.Schema({
     required: [true,"Author is required"],
     trim: true
   },
+  email:{
+    type:String,
+    require:[true,'email is required'],
+  
+    trim:true,
+    lowercase:true
+},
   content: {
     type: String,
     required: [true,"Category name is required"],

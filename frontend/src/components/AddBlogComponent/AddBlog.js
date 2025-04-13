@@ -1,98 +1,84 @@
 import './AddBlog.css';
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { apiurlBlog } from '../../Apiurl';
-function AddProduct() {
+
+function AddBlog({ onBlogAdded }) {
   const [file, setFile] = useState();
-  const [title , setTitle] = useState();
-  const [content , setContent] = useState();
-  // const [catName , setCatName] = useState();
-  // const [subCatName , setSubCatName] = useState();
-  const [AuthorName , setAuthorName] = useState(localStorage.getItem('name'));
-  // const [price , setPrice] = useState();
-  const [output , setOutput] = useState();
-  // const [ cDetails , setCategoryDetails ] = useState([]);
-  // const [ scDetails , setSubCategoryDetails ] = useState([]);
-  
-  // useEffect(()=>{
-  //     axios.get(apiurlCat+"fetch").then((response)=>{
-  //       setCategoryDetails(response.data);  
-  //     }).catch((error)=>{
-  //       console.log(error);   
-  //     });
-  // });
-  
-  const handleChange=(event)=>{
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [output, setOutput] = useState("");
+  const AuthorName = localStorage.getItem('name');
+
+  const handleChange = (event) => {
     setFile(event.target.files[0]);
-  }
-  
-  const handleSubmit=(event)=>{
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    var formData =new FormData();
+
+    const formData = new FormData();
     formData.append('title', title);
     formData.append('content', content);
-    // formData.append('subcatnm', subCatName);
     formData.append('author', AuthorName);
-    // formData.append('price', price);
     formData.append('picon', file);
+    formData.append("email", localStorage.getItem("email"));
+
     const config = {
-        'content-type': 'multipart/form-data'
+      headers: { 'content-type': 'multipart/form-data' }
     };
-   axios.post(apiurlBlog+"save", formData, config).then((response) => {
+
+    try {
+      await axios.post(apiurlBlog + "save", formData, config);
       setTitle("");
       setContent("");
-      // setSubCatName("");
-      setAuthorName("");
-      // setPrice("");
-      setOutput("Blog Added Successfully....");
-    });
-  }
-  
+      setFile(null);
+      setOutput("Blog Added Successfully!");
+
+      if (onBlogAdded) onBlogAdded(); 
+    } catch (err) {
+      console.error("Error posting blog", err);
+      setOutput("Something went wrong!");
+    }
+  };
+
   return (
-    <>
-    {/* About Start */}
-    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-12">
-                    <div class="section-title mb-4">
-                      <h1 class="display-5 mb-0">Add Blog Here !!!!!</h1>
-                      <font style={{"color":"blue"}} >{output}</font>
-                      <form>
-                        <div class="form-group">
-                          <label for="title">Title:</label>
-                          <input type="text" class="form-control" value={title} onChange={e => setTitle(e.target.value)} />
-                        </div>
-                        <br/>
-                        <div class="form-group">
-                          <label for="title">Blog Content:</label>
-                          <input type="text" class="form-control" value={content} onChange={e => setContent(e.target.value)} />
-                        </div>
-                        <br/>
-                        <div class="form-group">
-                          <label for="description">Author Name:</label>
-                          <input type="text" class="form-control" value={AuthorName} disabled onChange={e => setAuthorName(e.target.value)} />
-                        </div>
-                        <br/>
-                        <div class="form-group">
-                          <label for="picon" name='picon'>Blog Icon:</label>
-                          <input type="file" name='picon' class="form-control" onChange={handleChange} />
-                        </div>
-                        <br/>
-                        <button onClick={handleSubmit} type="button" class="btn btn-danger">Add Blog</button>
-                        <br/>
-                      </form>
-                    </div>
-                    <br />
+    <div className="container-fluid py-5 wow fadeInUp">
+      <div className="container">
+        <div className="row g-5 justify-content-center">
+          <div className="col-lg-6">
+            <div className="section-title mb-4">
+              <h1 className="display-5 mb-0">Add Blog Here!</h1>
+              <font style={{ color: "blue" }}>{output}</font>
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label>Title:</label>
+                  <input type="text" className="form-control" value={title} onChange={e => setTitle(e.target.value)} required />
                 </div>
+                <br />
+                <div className="form-group">
+                  <label>Blog Content:</label>
+                  <input type="text" className="form-control" value={content} onChange={e => setContent(e.target.value)} required />
+                </div>
+                <br />
+                <div className="form-group">
+                  <label>Author Name:</label>
+                  <input type="text" className="form-control" value={AuthorName} disabled />
+                </div>
+                <br />
+                <div className="form-group">
+                  <label>Blog Icon:</label>
+                  <input type="file" name="picon" className="form-control" onChange={handleChange} required />
+                </div>
+                <br />
+                <button type="submit" className="btn btn-danger">Add Blog</button>
+              </form>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    {/* About End */}
-
-
-    </>
-    );
+  );
 }
 
-export default AddProduct;
+export default AddBlog;

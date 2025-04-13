@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({"extended":true}));
 //aplication level middilewre check base url
 app.use("/user",userRouter);
 app.use("/addblog",blogRouter);
+app.use("/blog",blogRouter);
 
 app.listen(3001);
 console.log("Server listen at link :http://localhost:3001");

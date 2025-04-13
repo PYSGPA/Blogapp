@@ -30,8 +30,10 @@ export var save=async (req,res)=>{
    };
    
    export var fetch=async(req,res)=>{
+
       var condition_obj=url.parse(req.url,true).query;    
       var pList=await BlogSchemaModel.find(condition_obj);
+
       if(pList.length!=0)
         res.status(200).json(pList);
       else
