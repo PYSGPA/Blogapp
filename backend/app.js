@@ -8,7 +8,7 @@ const app = express();
 //to link router files on app.js
 import userRouter from './routes/user.router.js';
 import blogRouter from './routes/blog.router.js';
-
+import commentRouter from './routes/comment.router.js'
 //to load to cors function resolve cors problem
 app.use(cors());
 
@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({"extended":true}));
 app.use("/user",userRouter);
 app.use("/addblog",blogRouter);
 app.use("/blog",blogRouter);
+app.use("/comment",commentRouter);
 
 app.listen(3001);
 console.log("Server listen at link :http://localhost:3001");
