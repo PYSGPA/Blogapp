@@ -7,7 +7,7 @@ import { __Blogapiurl } from '../../Apiurl';
 function Blog() {
   const [blogs, setBlogs] = useState([]);
   const [expandedBlogs, setExpandedBlogs] = useState({}); // Track expanded state for each blog
-
+  const [liked, setLiked] = useState(false); // like state
   const userEmail = localStorage.getItem('email');
 
   const fetchBlogs = async () => {
@@ -32,6 +32,10 @@ function Blog() {
     }));
   };
 
+  const likehandler = () => {
+    setLiked(!liked);
+  }
+
   return (
     <>
       <AddBlog onBlogAdded={fetchBlogs} /> 
@@ -49,8 +53,8 @@ function Blog() {
                     <img src={`./assets/uploads/blogimages/${blog.imagenm}`} alt="Blog" className="blog-image" />
                     
                   </div>
-                  <div className="like_icon">
-                    <img src="./assets/images/like-icon.png" alt="like icon" />
+                  <div className="like_icon" onDoubleClick={likehandler}>
+                    <img src={liked ? "./assets/images/red-like-icon.png" : "./assets/images/like-icon.png"} alt="like icon" />
                     <p className="author-name mt-2 me-2" style={{ fontWeight: '500', fontStyle: 'italic' }}>
     — {blog.author || 'Unknown Author'}
   </p>

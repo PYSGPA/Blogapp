@@ -6,6 +6,7 @@ import { __ViewBlogapiurl } from '../../Apiurl';
 function ViewBlog() {
   const [blogs, setBlogs] = useState([]);
   const [expandedBlogs, setExpandedBlogs] = useState({}); // Track expanded state for each blog
+  const [liked, setLiked] = useState(false); // like state
 
   const fetchBlogs = async () => {
     try {
@@ -29,6 +30,10 @@ function ViewBlog() {
     }));
   };
 
+  const likehandler = () => {
+    setLiked(!liked);
+  }
+
   return (
     <>
      
@@ -45,8 +50,8 @@ function ViewBlog() {
                   <div className="about_img">
                     <img src={`./assets/uploads/blogimages/${blog.imagenm}`} alt="Blog" className="blog-image" />
                   </div>
-                  <div className="like_icon">
-                    <img src="./assets/images/like-icon.png" alt="like icon" />
+                  <div className="like_icon" onDoubleClick={likehandler}>
+                    <img src={liked ? "./assets/images/red-like-icon.png" : "./assets/images/like-icon.png"} alt="like icon" />
                   </div>
                   <div className="blog-content-wrapper">
                     <p className="post_text blog-date">Posted On: {new Date(blog.info).toLocaleString()}</p>
