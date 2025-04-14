@@ -115,7 +115,7 @@ function Nav() {
                                     <a className="nav-link" ><Link to="/" className='nav-a'> Home </Link> </a>
                                  </li>
                                  <li class="nav-item">
-                                    <a class="nav-link"><Link to="/blog" className='nav-a'> Blog </Link> </a>
+                                    <a class="nav-link"><Link to="/login" className='nav-a'> Blog </Link> </a>
                                  </li>
                                  
                                  <li class="nav-item">

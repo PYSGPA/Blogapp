@@ -43,10 +43,10 @@ function AddBlog({ onBlogAdded }) {
   };
 
   return (
-    <div className="container-fluid py-5 wow fadeInUp">
+    <div className="container-fluid py-2 wow fadeInUp">
       <div className="container">
-        <div className="row g-5 justify-content-center">
-          <div className="col-lg-6">
+        <div className="row justify-content-center">
+          <div className="col-lg-10">
             <div className="section-title mb-4">
               <h1 className="display-5 mb-0">Add Blog Here!</h1>
               <font style={{ color: "blue" }}>{output}</font>
@@ -57,9 +57,10 @@ function AddBlog({ onBlogAdded }) {
                 </div>
                 <br />
                 <div className="form-group">
-                  <label>Blog Content:</label>
-                  <input type="text" className="form-control" value={content} onChange={e => setContent(e.target.value)} required />
-                </div>
+  <label>Blog Content:</label>
+  <textarea className="form-control" value={content} onChange={e => setContent(e.target.value)} required  rows="3"></textarea>
+</div>
+                
                 <br />
                 <div className="form-group">
                   <label>Author Name:</label>

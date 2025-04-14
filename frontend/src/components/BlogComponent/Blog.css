@@ -1,63 +1,210 @@
+/* Blog Image Styling */
 .blog-image {
-    width: 100%;
-    height: auto;
-    max-height: 450px; /* Optional: limits extremely tall images */
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: auto;
+  max-height: 450px;
+  object-fit: cover; /* Changed to cover for better image fitting */
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease; /* Added hover effect for images */
+}
+
+.blog-image:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Blog Content Card Styling */
+.blog-content-wrapper {
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  margin-top: 20px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+  transition: box-shadow 0.3s ease; /* Added hover effect for card */
+}
+
+.blog-content-wrapper:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Deepens shadow on hover */
+}
+
+/* Title & Meta */
+.blog-title {
+  font-size: 30px; /* Increased size for better readability */
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.blog-date {
+  font-size: 15px;
+  color: #888;
+  margin-bottom: 18px;
+  font-style: italic; /* Added italic for styling */
+}
+
+/* Blog Text */
+.blog-content {
+  font-size: 1.2rem; /* Slightly larger text for readability */
+  line-height: 1.7;
+  color: #444;
+  white-space: pre-wrap;
+  margin-bottom: 20px;
+}
+
+/* Read More Button */
+.read-more-btn {
+  background-color: transparent;
+  border: none;
+  color: #e74c3c;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 5px 0;
+  margin-top: 10px;
+  font-size: 16px;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.read-more-btn:hover {
+  text-decoration: underline;
+  color: #c0392b; /* Darker red for better hover effect */
+}
+
+/* Author Name */
+.author-name {
+  color: #333;
+  font-size: 17px; /* Increased font size */
+  font-weight: 500;
+  text-align: right;
+  margin-top: 10px;
+  font-style: italic; /* Added italic for styling */
+}
+
+/* Modal Container */
+.add-blog-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInModal 0.3s ease-in-out; /* Modal animation */
+}
+
+/* Modal Background Overlay */
+.add-blog-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Darkened overlay */
+  backdrop-filter: blur(5px); /* Stronger blur effect */
+  z-index: 1;
+}
+
+/* Modal Content */
+.add-blog-content {
+  position: relative;
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  z-index: 2;
+  width: 90%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Added larger shadow */
+  animation: fadeIn 0.4s ease-in-out; /* Added animation for modal content */
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 2rem;
+  color: #555;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.close-btn:hover {
+  color: crimson; /* Change color on hover */
+}
+
+/* Modal Fade-in Animation */
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
   }
-  .blog-content-wrapper {
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    margin-top: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    font-family: 'Segoe UI', sans-serif;
+  to {
+    opacity: 1;
   }
-  
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Blog Card Animation */
+.blog-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.blog-card.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .blog-title {
-    font-size: 28px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 10px;
+    font-size: 26px;
   }
   
-  .blog-date {
-    font-size: 14px;
-    color: #888;
-    margin-bottom: 15px;
+  .blog-content-wrapper {
+    padding: 18px;
   }
   
-  .blog-content {
-    font-size: 16px;
-    line-height: 1.7;
-    color: #444;
-    white-space: pre-wrap; /* Keeps line breaks */
-  }
   .read-more-btn {
-    background-color: transparent;
-    border: none;
-    color: #e74c3c;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 0;
-    margin-top: 5px;
+    font-size: 14px;
   }
   
-  .read-more-btn:hover {
-    text-decoration: underline;
+  .add-blog-btn {
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-title {
+    font-size: 22px;
   }
   
-  .blog-content {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #444;
+  .blog-content-wrapper {
+    padding: 15px;
   }
-  .author-name {
-    color: #333;
+  
+  .read-more-btn {
+    font-size: 13px;
+  }
+  
+  .add-blog-btn {
     font-size: 16px;
-    text-align: right;
   }
-  
+}
