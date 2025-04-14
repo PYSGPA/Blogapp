@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './ViewBlog.css';
 import axios from 'axios';
-import { __ViewBlogapiurl } from '../../Apiurl';
+import { __ViewBlogapiurl, __ViewCommentapiurl } from '../../Apiurl';
 
 function ViewBlog() {
   const [blogs, setBlogs] = useState([]);
@@ -33,6 +33,51 @@ function ViewBlog() {
   const likehandler = () => {
     setLiked(!liked);
   }
+
+  //comment code started
+
+  const [commentText, setCommentText] = useState('');
+  const [comments, setComments] = useState([]);
+  const [commentMessage, setCommentMessage] = useState('');
+
+  const fetchComments = async () => {
+    try {
+      const res = await fetch(__ViewCommentapiurl+`${blogs[1]._id}`);
+      const data = await res.json();
+      setComments(data);
+    } catch (err) {
+      console.error('Failed to load comments');
+    }
+  };
+
+  const handleAddComment = async () => {
+    if (!commentText.trim()) {
+      setCommentMessage("Comment cannot be empty.");
+      return;
+    }
+
+    try {
+      const res = await fetch(__ViewCommentapiurl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ blogId: blogs[1]._id, text: commentText })
+      });
+
+      const newComment = await res.json();
+      setComments([newComment, ...comments]);
+      setCommentText('');
+      setCommentMessage('Comment added!');
+    } catch (error) {
+      console.error('Failed to post comment');
+    }
+  };
+
+  useEffect(() => {
+    fetchComments();
+  }, [blogs._id]);
+
+
+  //comment code ended
 
   return (
     <>
@@ -73,6 +118,35 @@ function ViewBlog() {
                         <li><a><img src="./assets/images/instagram-icon.png" alt="ig" /></a></li>
                       </ul>
                     </div>
+                    {/* Comment code start */}
+
+                      <div className="comment-section">
+                        <h3>Comments</h3>
+
+                        <textarea
+                          value={commentText}
+                          onChange={(e) => setCommentText(e.target.value)}
+                          placeholder="Write a comment..."
+                        />
+                        <button onClick={handleAddComment}>Post Comment</button>
+
+                        {commentMessage && <p className="comment-message">{commentMessage}</p>}
+
+                        <div className="comment-list">
+                          {comments.length === 0 ? (
+                            <p>No comments yet.</p>
+                          ) : (
+                            comments.map((c, index) => (
+                              <div key={index} className="comment-item">
+                                <p>{c.text}</p>
+                                <span>{new Date(c.date).toLocaleString()}</span>
+                              </div>
+                            ))
+                          )}
+                        </div>
+                      </div>
+
+                    {/* Comment code end */}
                   </div>
                 </div>
               );

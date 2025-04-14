@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import fileUpload from 'express-fileupload';
 
+
 const app = express();
 
 //to link router files on app.js
@@ -24,7 +25,7 @@ app.use(bodyParser.urlencoded({"extended":true}));
 app.use("/user",userRouter);
 app.use("/addblog",blogRouter);
 app.use("/blog",blogRouter);
-app.use("/comment",commentRouter);
+app.use('/api/comments', commentRouter);
 
 app.listen(3001);
 console.log("Server listen at link :http://localhost:3001");

@@ -1,19 +1,19 @@
 import mongoose from 'mongoose';
 
 const commentSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    ref: 'User', // optional: if you want to link with the User collection
-  },
-  content: {
-    type: String,
+  blogId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'product_collection',
     required: true,
   },
-  createdAt: {
+  text: {
+    type: String,
+    required: true,
+  },
+  date: {
     type: Date,
     default: Date.now,
-  }
+  },
 });
 
 export default mongoose.model('Comment', commentSchema);

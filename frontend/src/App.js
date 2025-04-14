@@ -23,8 +23,8 @@ function App() {
       <Nav/> 
       <Routes>
         <Route path='/' element={<ViewBlog />}> </Route>
-        <Route path='/admin' element={<AdminHome />}> </Route>
-        <Route path="/user" element ={<UserHome />} ></Route>
+        <Route path='/admin' element={<ViewBlog />}> </Route>
+        <Route path="/user" element ={<ViewBlog />} ></Route>
         {/* <Route path='/about' element={<About />}> </Route> */}
         <Route path='/Blog' element={<Blog />}> </Route>
         <Route path='/contact' element={<Contact />}> </Route>
