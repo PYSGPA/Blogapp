@@ -10,7 +10,7 @@ function Footer() {
   <div class="footer_section layout_padding">
          <div class="container">
             <div class="footer_logo"><a><img src="./assets/images/footer-logo.png"/></a></div>
-            <div class="footer_menu">
+            {/* <div class="footer_menu">
                <ul>
                   <li><a >Home</a></li>
                   <li><a >About</a></li>
@@ -18,7 +18,7 @@ function Footer() {
                   <li><a >Features</a></li>
                   <li><a >contact us</a></li>
                </ul>
-            </div>
+            </div> */}
             <div class="contact_menu">
                <ul>
                   <li><a><img src="./assets/images/call-icon.png"/></a></li>
@@ -33,7 +33,7 @@ function Footer() {
       {/* copyright section start */}
       <div class="copyright_section">
          <div class="container">
-            <p class="copyright_text">Copyright 2020 All Right Reserved By.<a> Free  html Templates</a></p>
+            <p class="copyright_text">Copyright 2024 All Right Reserved By.<a> Team CDGI</a></p>
          </div>
       </div>
       {/* copyright section end */}

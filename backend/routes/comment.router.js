@@ -1,18 +1,30 @@
 import express from 'express';
-import * as commentController from '../controller/comment.controller.js'; // adjust path as needed
+import Comment from '../models/comment.model.js';
 
 const router = express.Router();
 
-// Route to save a new comment
-router.post('/save', commentController.saveComment);
+// GET comments for a specific blog
+router.get('/:blogId', async (req, res) => {
+  try {
+    const comments = await Comment.find({ blogId: req.params.blogId }).sort({ date: -1 });
+    res.status(200).json(comments);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch comments' });
+  }
+});
 
-// Route to fetch all comments
-router.get('/fetch', commentController.fetchComments);
+// POST a new comment
+router.post('/', async (req, res) => {
+  const { blogId, text } = req.body;
+  if (!blogId || !text) return res.status(400).json({ error: 'Missing fields' });
 
-// Optionally, fetch comments by user email (for logged-in user)
-router.get('/fetchByEmail', commentController.fetchCommentsByEmail);
-
-// Optionally, delete a comment by its ID
-router.delete('/delete/:id', commentController.deleteComment);
+  try {
+    const newComment = new Comment({ blogId, text });
+    const saved = await newComment.save();
+    res.status(201).json(saved);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to add comment' });
+  }
+});
 
 export default router;

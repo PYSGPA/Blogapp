@@ -41,7 +41,7 @@ function Nav() {
                                  </li>
                                  
                                  <li class="nav-item">
-                                    <a class="nav-link adminpad"><Link to="/cpadmin" className='nav-a'> Change Password </Link> </a>
+                                    <a class="nav-link adminpad"><Link to="/cpuser" className='nav-a'> Change Password </Link> </a>
                                  </li>
                                  <li class="nav-item">
                                     <a class="nav-link adminpad"><Link to="/logout" className='nav-a'> Logout </Link> </a>
@@ -83,7 +83,7 @@ function Nav() {
                                     <select className="form-select select nav-link " onChange={handleSelect} aria-label="Default select example">
                                        <option value="" class="nav-link userpad">PROFILE SETTINGS</option>
                                        <option value="1" class="nav-link userpad">EDIT PROFILE</option>
-                                       <option value="2" class="nav-link userpad">MANAGE USER</option>
+                                       <option value="2" class="nav-link userpad">CHANGE PASSWORD</option>
                                     </select>
                                  </li>
                                  <li class="nav-item">
@@ -114,9 +114,9 @@ function Nav() {
                                  <li class="nav-item">
                                     <a className="nav-link" ><Link to="/" className='nav-a'> Home </Link> </a>
                                  </li>
-                                 <li class="nav-item">
+                                 {/* <li class="nav-item">
                                     <a class="nav-link"><Link to="/login" className='nav-a'> Blog </Link> </a>
-                                 </li>
+                                 </li> */}
                                  
                                  <li class="nav-item">
                                     <a class="nav-link"><Link to="/contact" className='nav-a'> Contact Us </Link> </a>
@@ -127,9 +127,9 @@ function Nav() {
                                  <li class="nav-item">
                                     <a class="nav-link"><Link to="/register" className='nav-a'> Register </Link> </a>
                                  </li>
-                                 <li class="nav-item">
+                                 {/* <li class="nav-item">
                                     <a class="nav-link"><img src="./assets/images/serach-icon.png"/></a>
-                                 </li>
+                                 </li> */}
                               </ul>
                            </div>
                         </nav>
