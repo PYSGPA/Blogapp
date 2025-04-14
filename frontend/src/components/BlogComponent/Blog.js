@@ -3,21 +3,25 @@ import './Blog.css';
 import AddBlog from '../AddBlogComponent/AddBlog';
 import axios from 'axios';
 import { __Blogapiurl } from '../../Apiurl';
-import { ToastContainer, toast } from 'react-toastify'; // Importing react-toastify
-import 'react-toastify/dist/ReactToastify.css'; // Importing toast styles
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
+
+// Importing comment and edit icons from FontAwesome
+import { FaComment, FaEdit } from 'react-icons/fa'; 
 
 function Blog() {
   const [blogs, setBlogs] = useState([]);
   const [expandedBlogs, setExpandedBlogs] = useState({});
   const [showAddBlog, setShowAddBlog] = useState(false);
- const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const [newComment, setNewComment] = useState(""); // State to hold the comment input
+  const [isCommenting, setIsCommenting] = useState(null); // Track which blog is being commented on
   const userEmail = localStorage.getItem('email');
 
   // Fetch blogs from the API
   const fetchBlogs = async () => {
     try {
       const res = await axios.get(__Blogapiurl + `fetch?email=${userEmail}`);
-      // console.log("Fetched Blogs: ", res.data);  // Added log to check data
       setBlogs(res.data);
     } catch (err) {
       console.error('Failed to fetch blogs', err);
@@ -55,20 +59,56 @@ function Blog() {
     setLiked(!liked);
   };
 
+  const handleCommentClick = (blogId) => {
+    if (userEmail) { // Ensure user is logged in
+      setIsCommenting(blogId); // Set the blog to be commented on
+    } else {
+      toast.error('You need to be logged in to comment!');
+    }
+  };
+
+  const handleCommentSubmit = async (blogId) => {
+    if (newComment.trim()) {
+      try {
+        // Assuming the API has a route to add a comment to a blog
+        await axios.post(__Blogapiurl + `addComment`, {
+          blogId,
+          userEmail, // Get the logged-in user's email
+          comment: newComment,
+        });
+
+        // Reset the comment input and fetch updated blogs
+        setNewComment('');
+        setIsCommenting(null);
+        fetchBlogs(); // Refresh the list of blogs with the new comment added
+        toast.success('Comment added successfully!');
+      } catch (err) {
+        console.error('Error adding comment:', err);
+        toast.error('Failed to add comment');
+      }
+    } else {
+      toast.warning('Please enter a comment');
+    }
+  };
+
+  // Define the handleEditClick function here
+  const handleEditClick = (blogId) => {
+    console.log('Edit clicked for blog:', blogId);
+    // You could open an edit modal or navigate to an edit page
+    // Example: Redirect to an edit page
+    // window.location.href = `/edit-blog/${blogId}`; 
+  };
 
   return (
     <>
-      {/* Toast Container */}
       <ToastContainer />
 
-      {/* Add Blog Button */}
       <div className="text-center mb-4">
         <button className="btn btn-danger add-blog-btn" onClick={() => setShowAddBlog(true)}>
           Add New Blog
         </button>
       </div>
 
-      {/* AddBlog Modal */}
       {showAddBlog && (
         <div className="add-blog-modal">
           <div className="add-blog-overlay" onClick={() => setShowAddBlog(false)}></div>
@@ -87,11 +127,9 @@ function Blog() {
         </div>
       )}
 
-      {/* Blog Cards Section */}
       <div className="about_section layout_padding">
         <div className="container">
           <div className="row justify-content-center mb-5">
-            {/* Check if blogs exist and map over them */}
             {blogs.length > 0 ? (
               [...blogs].reverse().map((blog, index) => {
                 const isExpanded = expandedBlogs[index];
@@ -107,14 +145,11 @@ function Blog() {
                         className="blog-image"
                       />
                     </div>
-                    {/* <div className="like_icon">
-                      <img src="./assets/images/like-icon.png" alt="like icon" /> */}
-                      <div className="like_icon" onDoubleClick={likehandler}>
+                    <div className="like_icon" onDoubleClick={likehandler}>
                       <img
-                        src={liked ? "./assets/images/red-like-icon.png" : "./assets/images/like-icon.png"}
+                        src={liked ? './assets/images/red-like-icon.png' : './assets/images/like-icon.png'}
                         alt="like icon"
                       />
-                    
                       <p className="author-name mt-2 me-2" style={{ fontWeight: '500', fontStyle: 'italic' }}>
                         — {blog.author || 'Unknown Author'}
                       </p>
@@ -131,9 +166,11 @@ function Blog() {
                         </button>
                       )}
                     </div>
-                    <div className="social_icon_main mt-2">
+
+                    {/* Social Icons */}
+                    <div className="social_icon_main mt-2 d-flex justify-content-between align-items-center">
                       <div className="social_icon">
-                        <ul>
+                        <ul className="d-flex">
                           <li>
                             <a>
                               <img src="./assets/images/fb-icon.png" alt="fb" />
@@ -151,6 +188,46 @@ function Blog() {
                           </li>
                         </ul>
                       </div>
+
+                      {/* Comment and Edit Icons on the right side */}
+                      <div className="comment-edit-icons d-flex align-items-center">
+                        <FaComment
+                          onClick={() => handleCommentClick(blog._id)} // Replace with the actual blog id
+                          size={24}
+                          color="black" // Black color for comment icon
+                          style={{ cursor: 'pointer', marginLeft: '15px' }}
+                        />
+                        <FaEdit
+                          onClick={() => handleEditClick(blog._id)} // Handle Edit Click
+                          size={24}
+                          color="black" // Black color for edit icon
+                          style={{ cursor: 'pointer', marginLeft: '10px' }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Comment Input Area */}
+                    {isCommenting === blog._id && (
+                      <div className="comment-section">
+                        <textarea
+                          placeholder="Type your comment here..."
+                          value={newComment}
+                          onChange={(e) => setNewComment(e.target.value)}
+                          className="comment-input"
+                        />
+                        <button onClick={() => handleCommentSubmit(blog._id)} className="comment-submit-btn">
+                          Submit Comment
+                        </button>
+                      </div>
+                    )}
+
+                    {/* Display comments */}
+                    <div className="comments">
+                      {blog.comments && blog.comments.map((comment, i) => (
+                        <div key={i} className="comment">
+                          <p><strong>{comment.userEmail}:</strong> {comment.text}</p>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 );

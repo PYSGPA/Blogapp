@@ -208,3 +208,22 @@
     font-size: 16px;
   }
 }
+.social_icon_main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-edit-icons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.social_icon ul {
+  display: flex;
+  gap: 10px;
+}
+.comment-edit-icons svg {
+  color: black;
+}
