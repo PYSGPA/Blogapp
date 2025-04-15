@@ -57,7 +57,7 @@ function ViewBlog() {
     try {
       await axios.post(`${__ViewCommentapiurl}add`, {
         blogId,
-        username: 'Anonymous', // or replace with actual user if you have auth
+        username: localStorage.getItem('name'), // or replace with actual user if you have auth
         commentText: commentInputs[blogId] || ''
       });
       setCommentInputs(prev => ({ ...prev, [blogId]: '' }));
