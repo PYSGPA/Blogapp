@@ -7,11 +7,18 @@ function ViewBlog() {
   const [blogs, setBlogs] = useState([]);
   const [expandedBlogs, setExpandedBlogs] = useState({}); // Track expanded state for each blog
   const [liked, setLiked] = useState(false); // like state
+  //comment code started
+
+  const [commentInputs, setCommentInputs] = useState({});
+  const [comments, setComments] = useState({});
+
+  //comment code ended
 
   const fetchBlogs = async () => {
     try {
       const res = await axios.get(__ViewBlogapiurl + `fetch`);
       setBlogs(res.data);
+      res.data.forEach(blog => fetchCommentsForBlog(blog._id));
     } catch (err) {
       console.error("Failed to fetch blogs", err);
     }
@@ -36,46 +43,29 @@ function ViewBlog() {
 
   //comment code started
 
-  const [commentText, setCommentText] = useState('');
-  const [comments, setComments] = useState([]);
-  const [commentMessage, setCommentMessage] = useState('');
-
-  const fetchComments = async () => {
+  const fetchCommentsForBlog = async (blogId) => {
     try {
-      const res = await fetch(__ViewCommentapiurl+`${blogs[1]._id}`);
-      const data = await res.json();
-      setComments(data);
+      const res = await axios.get(`${__ViewCommentapiurl}fetch?blogId=${blogId}`);
+      setComments(prev => ({ ...prev, [blogId]: res.data }));
     } catch (err) {
-      console.error('Failed to load comments');
+      console.error("Failed to fetch comments", err);
     }
   };
 
-  const handleAddComment = async () => {
-    if (!commentText.trim()) {
-      setCommentMessage("Comment cannot be empty.");
-      return;
-    }
-
+  const handleCommentSubmit = async (e, blogId) => {
+    e.preventDefault();
     try {
-      const res = await fetch(__ViewCommentapiurl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ blogId: blogs[1]._id, text: commentText })
+      await axios.post(`${__ViewCommentapiurl}add`, {
+        blogId,
+        username: 'Anonymous', // or replace with actual user if you have auth
+        commentText: commentInputs[blogId] || ''
       });
-
-      const newComment = await res.json();
-      setComments([newComment, ...comments]);
-      setCommentText('');
-      setCommentMessage('Comment added!');
-    } catch (error) {
-      console.error('Failed to post comment');
+      setCommentInputs(prev => ({ ...prev, [blogId]: '' }));
+      fetchCommentsForBlog(blogId);
+    } catch (err) {
+      console.error("Failed to post comment", err);
     }
   };
-
-  useEffect(() => {
-    fetchComments();
-  }, [blogs._id]);
-
 
   //comment code ended
 
@@ -120,31 +110,27 @@ function ViewBlog() {
                     </div>
                     {/* Comment code start */}
 
-                      <div className="comment-section">
-                        <h3>Comments</h3>
-
-                        <textarea
-                          value={commentText}
-                          onChange={(e) => setCommentText(e.target.value)}
-                          placeholder="Write a comment..."
+                    <div className="comment-section mt-3">
+                      <h5>Comments</h5>
+                      <form onSubmit={(e) => handleCommentSubmit(e, blog._id)}>
+                        <input
+                          type="text"
+                          value={commentInputs[blog._id] || ''}
+                          onChange={(e) => setCommentInputs(prev => ({ ...prev, [blog._id]: e.target.value }))}
+                          placeholder="Add a comment"
+                          required
+                          className="form-control mb-2"
                         />
-                        <button onClick={handleAddComment}>Post Comment</button>
-
-                        {commentMessage && <p className="comment-message">{commentMessage}</p>}
-
-                        <div className="comment-list">
-                          {comments.length === 0 ? (
-                            <p>No comments yet.</p>
-                          ) : (
-                            comments.map((c, index) => (
-                              <div key={index} className="comment-item">
-                                <p>{c.text}</p>
-                                <span>{new Date(c.date).toLocaleString()}</span>
-                              </div>
-                            ))
-                          )}
-                        </div>
+                        <button type="submit" className="btn btn-primary btn-sm">Post</button>
+                      </form>
+                      <div className="comment-list mt-2">
+                        {(comments[blog._id] || []).map((c, i) => (
+                          <div key={i} className="comment">
+                            <strong>{c.username}</strong>: {c.commentText}
+                          </div>
+                        ))}
                       </div>
+                    </div>
 
                     {/* Comment code end */}
                   </div>
